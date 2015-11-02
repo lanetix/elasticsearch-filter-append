@@ -11,6 +11,25 @@ filter to their input; trimming their results on the fly.
 
 ## `methods`
 
+### `constructor(search)`
+
+- `search` - An [elasticsearch search](https://www.elastic.co/guide/en/elasticsearch/client/javascript-api/current/api-reference.html#api-search)
+
+```js
+var FilterBuilder = require('elasticsearch-filter-append')
+
+var search = {
+  from: 99,
+  filter: {
+    term: {
+      name: 'Atlanta, GA'
+    }
+  }
+}
+
+var builder = new FilterBuilder(search)
+```
+
 ### `append(filter1, filter2, filter3....filterN|Array)`
 
 `append` supports variable arguments or an `Array` as input:
@@ -86,7 +105,7 @@ AND (cond3)
 You could call `append` as follows:
 
 ```
-builder.append(filter1, filter2).append(filter)
+var secureSearch = builder.append(filter1, filter2).append(filter).toSearch()
 ```
 
 Yes, did I mention that `append` also supports chaining? :wink:
