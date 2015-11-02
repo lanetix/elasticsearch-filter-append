@@ -201,4 +201,19 @@ describe('filter append', function () {
 
     should(builder).throw()
   })
+
+  it('should throw if bool and must are both provided', function () {
+    var search = {
+      filter: {
+        bool: {
+          must: {},
+          should: {}
+        }
+      }
+    }
+
+    var builder = function () { return new FilterBuilder(search) }
+
+    builder()
+  })
 })
