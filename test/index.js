@@ -64,6 +64,18 @@ describe('filter append', function () {
     should(builder.toSearch()).deepEqual(output)
   })
 
+  it('should convert a filtered querie\'s simple filter to a must filter', function () {
+    var search = require('./scenarios/filtered-query-simple-filter.json').search
+    var filter = require('./scenarios/filtered-query-simple-filter.json').filter
+    var output = require('./scenarios/filtered-query-simple-filter.json').output
+
+    var builder = new FilterBuilder(search)
+
+    builder.append(filter)
+
+    should(builder.toSearch()).deepEqual(output)
+  })
+
   it('should support appending an array of filters', function () {
     var search = require('./scenarios/simple-filter.json').search
     var filter = require('./scenarios/simple-filter.json').filter
