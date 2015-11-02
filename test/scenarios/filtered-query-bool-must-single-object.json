@@ -10,7 +10,7 @@
             "fields": [
               "name",
               "first_name",
-              "workflow.owner.name"
+              "parent.name"
             ]
           }
         },
@@ -42,7 +42,7 @@
             "fields": [
               "name",
               "first_name",
-              "workflow.owner.name"
+              "parent.name"
             ]
           }
         },
