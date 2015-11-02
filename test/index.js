@@ -52,6 +52,18 @@ describe('filter append', function () {
     should(builder.toSearch()).deepEqual(output)
   })
 
+  it('should convert a filtered querie\'s bool should filter to a must filter', function () {
+    var search = require('./scenarios/filtered-query-bool-should.json').search
+    var filter = require('./scenarios/filtered-query-bool-should.json').filter
+    var output = require('./scenarios/filtered-query-bool-should.json').output
+
+    var builder = new FilterBuilder(search)
+
+    builder.append(filter)
+
+    should(builder.toSearch()).deepEqual(output)
+  })
+
   it('should convert a simple filter to a must filter', function () {
     var search = require('./scenarios/simple-filter.json').search
     var filter = require('./scenarios/simple-filter.json').filter
