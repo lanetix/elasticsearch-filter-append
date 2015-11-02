@@ -3,12 +3,8 @@
     "filter": {
       "bool": {
         "must": {
-          "bool": {
-            "should": {
-              "term": {
-                "name": "Antwan Atkins"
-              }
-            }
+          "term": {
+            "name": "Antwan Atkins"
           }
         }
       }
@@ -24,13 +20,8 @@
       "bool": {
         "must": [
           {
-            "bool": {
-              "should":
-              {
-                "term": {
-                  "name": "Antwan Atkins"
-                }
-              }
+            "term": {
+              "name": "Antwan Atkins"
             }
           },
           {
