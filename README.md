@@ -44,7 +44,7 @@ var builder = new FilterBuilder(search)
 builder.append(filter1, filter2)
 ```
 
-*OR*
+**OR**
 
 ```js
 var FilterBuilder = require('elasticsearch-filter-append')
