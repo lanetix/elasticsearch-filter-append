@@ -1,7 +1,7 @@
 var builderStrategy = require('./lib/strategy')
 var toArray = require('lodash.toarray')
 
-function validateSearch(search) {
+function validateSearch (search) {
   if (!search) {
     throw new TypeError('search is required')
   }
@@ -15,20 +15,20 @@ function validateSearch(search) {
   }
 }
 
-function FilterBuilder(search) {
+function FilterBuilder (search) {
   validateSearch(search)
 
   this._search = search
 }
 
-FilterBuilder.prototype.append = function() {
+FilterBuilder.prototype.append = function () {
   var strategy = builderStrategy(this._search)
   var filters = toArray(arguments)
 
   strategy(this._search, filters)
 }
 
-FilterBuilder.prototype.toSearch = function() {
+FilterBuilder.prototype.toSearch = function () {
   return this._search
 }
 
