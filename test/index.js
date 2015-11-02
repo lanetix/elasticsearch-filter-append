@@ -28,10 +28,10 @@ describe('filter append', function () {
     should(builder.toSearch()).deepEqual(output)
   })
 
-  it('should append directly to a filtered querie\'s bool must filter when it is an array of filters', function () {
-    var search = require('./scenarios/filtered-query-bool-must-array.json').search
-    var filter = require('./scenarios/filtered-query-bool-must-array.json').filter
-    var output = require('./scenarios/filtered-query-bool-must-array.json').output
+  it('should convert a filtered query\'s bool must filter with a single object to an array of filters', function () {
+    var search = require('./scenarios/filtered-query-bool-must-single-object.json').search
+    var filter = require('./scenarios/filtered-query-bool-must-single-object.json').filter
+    var output = require('./scenarios/filtered-query-bool-must-single-object.json').output
 
     var builder = new FilterBuilder(search)
 
@@ -44,6 +44,18 @@ describe('filter append', function () {
     var search = require('./scenarios/bool-must-array.json').search
     var filter = require('./scenarios/bool-must-array.json').filter
     var output = require('./scenarios/bool-must-array.json').output
+
+    var builder = new FilterBuilder(search)
+
+    builder.append(filter)
+
+    should(builder.toSearch()).deepEqual(output)
+  })
+
+  it('should append directly to a filtered query\'s bool must filter when it is an array of filters', function () {
+    var search = require('./scenarios/filtered-query-bool-must-array.json').search
+    var filter = require('./scenarios/filtered-query-bool-must-array.json').filter
+    var output = require('./scenarios/filtered-query-bool-must-array.json').output
 
     var builder = new FilterBuilder(search)
 
@@ -88,7 +100,7 @@ describe('filter append', function () {
     should(builder.toSearch()).deepEqual(output)
   })
 
-  it('should convert a filtered querie\'s simple filter to a must filter', function () {
+  it('should convert a filtered query\'s simple filter to a must filter', function () {
     var search = require('./scenarios/filtered-query-simple-filter.json').search
     var filter = require('./scenarios/filtered-query-simple-filter.json').filter
     var output = require('./scenarios/filtered-query-simple-filter.json').output
