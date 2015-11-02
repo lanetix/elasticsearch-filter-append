@@ -162,17 +162,6 @@ describe('filter append', function () {
     should(builder).throw()
   })
 
-  it('should throw if a query and filter are provided', function () {
-    var search = {
-      query: {},
-      filter: {}
-    }
-
-    var builder = function () { return new FilterBuilder(search) }
-
-    should(builder).throw()
-  })
-
   it('should throw if a filtered query does not contain a filter', function () {
     var search = {
       query: {
@@ -199,21 +188,6 @@ describe('filter append', function () {
     var builder = function () { return new FilterBuilder(search) }
 
     should(builder).throw()
-  })
-
-  it('should throw if bool and must are both provided', function () {
-    var search = {
-      filter: {
-        bool: {
-          must: {},
-          should: {}
-        }
-      }
-    }
-
-    var builder = function () { return new FilterBuilder(search) }
-
-    builder()
   })
 
   it('should support chaining', function () {
