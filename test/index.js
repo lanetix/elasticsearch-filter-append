@@ -27,4 +27,16 @@ describe('filter append', function () {
 
     should(builder.toSearch()).deepEqual(output)
   })
+
+  it('should append directly to a bool must filter when it is an array of filters', function () {
+    var search = require('./scenarios/bool-must-array.json').search
+    var filter = require('./scenarios/bool-must-array.json').filter
+    var output = require('./scenarios/bool-must-array.json').output
+
+    var builder = new FilterBuilder(search)
+
+    builder.append(filter)
+
+    should(builder.toSearch()).deepEqual(output)
+  })
 })

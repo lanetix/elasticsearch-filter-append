@@ -1,0 +1,66 @@
+{
+  "search" : {
+    "filter": {
+      "bool": {
+        "must": [
+          {
+            "bool": {
+              "should": [
+                {
+                  "term": {
+                    "name": "Professor Pythonesque"
+                  }
+                },
+                {
+                  "term": {
+                    "name": "Abraham Lost In San Francisco"
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  "filter": {
+    "term": {
+      "name": "Antwan Atkins"
+    }
+  },
+  "output": {
+    "filter": {
+      "bool": {
+        "must": [
+          {
+            "bool": {
+              "should": [
+                {
+                  "term": {
+                    "name": "Professor Pythonesque"
+                  }
+                },
+                {
+                  "term": {
+                    "name": "Abraham Lost In San Francisco"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "bool": {
+              "should": [
+                {
+                  "term": {
+                    "name": "Antwan Atkins"
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}
