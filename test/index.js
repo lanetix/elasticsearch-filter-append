@@ -40,6 +40,18 @@ describe('filter append', function () {
     should(builder.toSearch()).deepEqual(output)
   })
 
+  it('should convert a bool should filter to a must filter', function () {
+    var search = require('./scenarios/bool-should.json').search
+    var filter = require('./scenarios/bool-should.json').filter
+    var output = require('./scenarios/bool-should.json').output
+
+    var builder = new FilterBuilder(search)
+
+    builder.append(filter)
+
+    should(builder.toSearch()).deepEqual(output)
+  })
+
   it('should throw if an invalid bool filter is provided', function () {
     var search = {
       filter: {
