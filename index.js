@@ -1,6 +1,7 @@
 var builderStrategy = require('./lib/strategy')
 var toArray = require('lodash.toarray')
 var clone = require('lodash.clone')
+var isArray = require('lodash.isarray')
 
 function validateSearch (search) {
   if (!search) {
@@ -28,7 +29,7 @@ function FilterBuilder (search) {
 
 FilterBuilder.prototype.append = function () {
   var strategy = builderStrategy(this._search)
-  var filters = toArray(arguments)
+  var filters = isArray(arguments[0]) ? arguments[0] : toArray(arguments)
 
   strategy(this._search, filters)
 }

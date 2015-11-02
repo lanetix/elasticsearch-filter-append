@@ -64,6 +64,18 @@ describe('filter append', function () {
     should(builder.toSearch()).deepEqual(output)
   })
 
+  it('should support appending an array of filters', function () {
+    var search = require('./scenarios/simple-filter.json').search
+    var filter = require('./scenarios/simple-filter.json').filter
+    var output = require('./scenarios/simple-filter.json').output
+
+    var builder = new FilterBuilder(search)
+
+    builder.append([filter])
+
+    should(builder.toSearch()).deepEqual(output)
+  })
+
   it('should throw if an invalid bool filter is provided', function () {
     var search = {
       filter: {
