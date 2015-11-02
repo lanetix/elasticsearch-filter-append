@@ -55,4 +55,10 @@ describe('filter append', function () {
 
     should(append).throw()
   })
+
+  it('should throw if search is not provided', function () {
+    var builder = function () { return new FilterBuilder(undefined) }
+
+    should(builder).throw()
+  })
 })
