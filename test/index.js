@@ -92,4 +92,18 @@ describe('filter append', function () {
 
     should(builder).throw()
   })
+
+  it('should throw if a filterd query does not contain a query', function () {
+    var search = {
+      query: {
+        filtered: {
+          filter: {}
+        }
+      }
+    }
+
+    var builder = function () { return new FilterBuilder(search) }
+
+    should(builder).throw()
+  })
 })
