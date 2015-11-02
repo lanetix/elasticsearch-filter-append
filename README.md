@@ -6,7 +6,7 @@ Append additional filters to filters, queries, and filtered queries.
 
 ### `append(filter1, filter2, filter3....filterN|Array)`
 
-`append` supports variable arguments or array as input:
+`append` supports variable arguments or an `Array` as input:
 
 ```js
 var FilterBuilder = require('elasticsearch-filter-append')
