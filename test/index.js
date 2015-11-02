@@ -67,4 +67,15 @@ describe('filter append', function () {
 
     should(builder).throw()
   })
+
+  it('should throw if a query and filter are provided', function () {
+    var builder = function () {
+      return new FilterBuilder({
+        query: {},
+        filter: {}
+      })
+    }
+
+    should(builder).throw()
+  })
 })

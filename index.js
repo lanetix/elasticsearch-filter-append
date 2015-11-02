@@ -10,6 +10,10 @@ function validateSearch (search) {
     throw new Error('invalid search. one of search.filter or search.query is required.')
   }
 
+  if (search.filter && search.query) {
+    throw new Error('search.filter and search.query are mutually exclusive. use a filtered query to combine the two')
+  }
+
   if (search.query && search.query.filtered && !search.query.filtered.query && !search.query.filtered.filter) {
     throw new Error('filtered queries require a filter and a query')
   }
