@@ -39,4 +39,20 @@ describe('filter append', function () {
 
     should(builder.toSearch()).deepEqual(output)
   })
+
+  it('should throw if an invalid bool filter is provided', function () {
+    var search = {
+      filter: {
+        bool: {
+          fredoSanta: 'Chi-Raq',
+          should: undefined // hack around should.js populating this property
+        }
+      }
+    }
+
+    var builder = new FilterBuilder(search)
+    var append = function () { builder.append({}) }
+
+    should(append).throw()
+  })
 })
