@@ -36,6 +36,8 @@ FilterBuilder.prototype.append = function () {
   }
 
   strategy(this._search, filters)
+
+  return this
 }
 
 FilterBuilder.prototype.toSearch = function () {

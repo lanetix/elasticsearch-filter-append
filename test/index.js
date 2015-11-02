@@ -139,8 +139,7 @@ describe('filter append', function () {
     var search = {
       filter: {
         bool: {
-          fredoSanta: 'Chi-Raq',
-          should: undefined // hack around should.js populating this property
+          fredoSanta: 'Chi-Raq'
         }
       }
     }
@@ -215,5 +214,17 @@ describe('filter append', function () {
     var builder = function () { return new FilterBuilder(search) }
 
     builder()
+  })
+
+  it('should support chaining', function () {
+    var search = require('./scenarios/query-chaining.json').search
+    var filter = require('./scenarios/query-chaining.json').filter
+    var output = require('./scenarios/query-chaining.json').output
+
+    var builder = new FilterBuilder(search)
+
+    builder.append(filter).append(filter)
+
+    should(builder.toSearch()).deepEqual(output)
   })
 })
