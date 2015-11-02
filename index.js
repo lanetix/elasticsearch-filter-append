@@ -31,6 +31,10 @@ FilterBuilder.prototype.append = function () {
   var strategy = builderStrategy(this._search)
   var filters = isArray(arguments[0]) ? arguments[0] : toArray(arguments)
 
+  if (!filters.length) {
+    throw new Error('a minimum of one filter is required')
+  }
+
   strategy(this._search, filters)
 }
 

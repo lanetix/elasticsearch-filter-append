@@ -76,6 +76,17 @@ describe('filter append', function () {
     should(builder.toSearch()).deepEqual(output)
   })
 
+  it('should throw if no filters are provided', function () {
+    var search = {
+      filter: {}
+    }
+
+    var builder = new FilterBuilder(search)
+    var append = function () { builder.append() }
+
+    should(append).throw()
+  })
+
   it('should throw if an invalid bool filter is provided', function () {
     var search = {
       filter: {
