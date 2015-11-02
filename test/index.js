@@ -69,12 +69,26 @@ describe('filter append', function () {
   })
 
   it('should throw if a query and filter are provided', function () {
-    var builder = function () {
-      return new FilterBuilder({
-        query: {},
-        filter: {}
-      })
+    var search = {
+      query: {},
+      filter: {}
     }
+
+    var builder = function () { return new FilterBuilder(search) }
+
+    should(builder).throw()
+  })
+
+  it('should throw if a filterd query does not contain a filter', function () {
+    var search = {
+      query: {
+        filtered: {
+          query: {}
+        }
+      }
+    }
+
+    var builder = function () { return new FilterBuilder(search) }
 
     should(builder).throw()
   })

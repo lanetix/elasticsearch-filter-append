@@ -14,7 +14,7 @@ function validateSearch (search) {
     throw new Error('search.filter and search.query are mutually exclusive. use a filtered query to combine the two')
   }
 
-  if (search.query && search.query.filtered && !search.query.filtered.query && !search.query.filtered.filter) {
+  if (search.query && search.query.filtered && (!search.query.filtered.query || !search.query.filtered.filter)) {
     throw new Error('filtered queries require a filter and a query')
   }
 }
