@@ -2,6 +2,13 @@
 
 Append additional filters to filters, queries, and filtered queries.
 
+# Why?
+
+This library exists primarily for security reasons. Imagine you're accepting a user generated filter but would
+like to tack on security trimming to input. A user could submit an arbitrary filter that opens up the flood gates
+and allows them to see *EVERYTHING*. You could ensure the user only views their information by appending an extra security
+filter to their input; trimming their results on the fly.
+
 ## `methods`
 
 ### `append(filter1, filter2, filter3....filterN|Array)`
