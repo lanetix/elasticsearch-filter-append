@@ -1,0 +1,38 @@
+{
+  "search" : {
+    "filter": {
+      "term": {
+        "name": "Antwan Atkins"
+      }
+    }
+  },
+  "filter": {
+    "term": {
+      "name": "Antwan Atkins"
+    }
+  },
+  "output": {
+    "filter": {
+      "bool": {
+        "must": [
+          {
+            "term": {
+              "name": "Antwan Atkins"
+            }
+          },
+          {
+            "bool": {
+              "should": [
+                {
+                  "term": {
+                    "name": "Antwan Atkins"
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}
