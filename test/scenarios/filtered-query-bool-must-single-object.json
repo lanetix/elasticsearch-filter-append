@@ -1,0 +1,74 @@
+{
+  "search" : {
+    "fields": ["one"],
+    "query": {
+      "filtered": {
+        "query": {
+          "query_string": {
+            "query": "*I spy an @kyspy \\? \\* &*",
+            "default_operator": "AND",
+            "fields": [
+              "name",
+              "first_name",
+              "parent.name"
+            ]
+          }
+        },
+        "filter": {
+          "bool": {
+            "must": {
+              "term": {
+                "name": "Antwan Atkins"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "filter": {
+    "term": {
+      "name": "Antwan Goes To School"
+    }
+  },
+  "output": {
+    "fields": ["one"],
+    "query": {
+      "filtered": {
+        "query": {
+          "query_string": {
+            "query": "*I spy an @kyspy \\? \\* &*",
+            "default_operator": "AND",
+            "fields": [
+              "name",
+              "first_name",
+              "parent.name"
+            ]
+          }
+        },
+        "filter": {
+          "bool": {
+            "must": [
+              {
+                "term": {
+                  "name": "Antwan Atkins"
+                }
+              },
+              {
+                "bool": {
+                  "should": [
+                    {
+                      "term": {
+                        "name": "Antwan Goes To School"
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}

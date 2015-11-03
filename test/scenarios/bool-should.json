@@ -1,0 +1,76 @@
+{
+  "search" : {
+    "filter": {
+      "bool": {
+        "should": [
+          {
+            "bool": {
+              "must": {
+                "term": {
+                  "name": "Antwan Atkins"
+                }
+              }
+            }
+          },
+          {
+            "bool": {
+              "must": {
+                "term": {
+                  "name": "J.Cole World"
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "filter": {
+    "term": {
+      "name": "Antwan Atkins"
+    }
+  },
+  "output": {
+    "filter": {
+      "bool": {
+        "must": [
+          {
+            "bool": {
+              "should": [
+                {
+                  "bool": {
+                    "must": {
+                      "term": {
+                        "name": "Antwan Atkins"
+                      }
+                    }
+                  }
+                },
+                {
+                  "bool": {
+                    "must": {
+                      "term": {
+                        "name": "J.Cole World"
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "bool": {
+              "should": [
+                {
+                  "term": {
+                    "name": "Antwan Atkins"
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}

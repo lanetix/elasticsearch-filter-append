@@ -1,0 +1,98 @@
+{
+  "search" : {
+    "fields": ["one"],
+    "query": {
+      "filtered": {
+        "query": {
+          "query_string": {
+            "query": "*I spy an @kyspy \\? \\* &*",
+            "default_operator": "AND",
+            "fields": [
+              "name",
+              "first_name",
+              "parent.name"
+            ]
+          }
+        },
+        "filter": {
+          "bool": {
+            "must": [
+              {
+                "bool": {
+                  "should": [
+                    {
+                      "term": {
+                        "name": "Professor Pythonesque"
+                      }
+                    },
+                    {
+                      "term": {
+                        "name": "Abraham Lost In San Francisco"
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
+  "filter": {
+    "term": {
+      "name": "Antwan Goes To School"
+    }
+  },
+  "output": {
+    "fields": ["one"],
+    "query": {
+      "filtered": {
+        "query": {
+          "query_string": {
+            "query": "*I spy an @kyspy \\? \\* &*",
+            "default_operator": "AND",
+            "fields": [
+              "name",
+              "first_name",
+              "parent.name"
+            ]
+          }
+        },
+        "filter": {
+          "bool": {
+            "must": [
+              {
+                "bool": {
+                  "should": [
+                    {
+                      "term": {
+                        "name": "Professor Pythonesque"
+                      }
+                    },
+                    {
+                      "term": {
+                        "name": "Abraham Lost In San Francisco"
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "bool": {
+                  "should": [
+                    {
+                      "term": {
+                        "name": "Antwan Goes To School"
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "search" : {
+    "query": {
+      "query_string": {
+        "query": "*I spy an @kyspy \\? \\* &*",
+        "default_operator": "AND",
+        "fields": ["name", "first_name", "workflow.owner.name"]
+      }
+    }
+  },
+  "filter": {
+    "term": {
+      "name": "Antwan Atkins"
+    }
+  },
+  "output": {
+    "query": {
+      "filtered": {
+        "query": {
+          "query_string": {
+            "query": "*I spy an @kyspy \\? \\* &*",
+            "default_operator": "AND",
+            "fields": ["name", "first_name", "workflow.owner.name"]
+          }
+        },
+        "filter": {
+          "bool": {
+            "should": [
+              {
+                "term": {
+                  "name": "Antwan Atkins"
+                }
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}
