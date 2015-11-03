@@ -99,13 +99,12 @@ builder.append(filters)
 The set of filters provided will be converted to an instance of a `should` filter. That means at least one of the condtitions
 provided must evaluate to true. You can apply as many groups of conditions as you like. For example, to represent
 
-(cond1 OR cond2)
-AND (cond3)
+`(cond1 OR cond2) AND (cond3)`
 
 You could call `append` as follows:
 
 ```
-var secureSearch = builder.append(filter1, filter2).append(filter).toSearch()
+var secureSearch = builder.append(filter1, filter2).append(filter3).toSearch()
 ```
 
 Yes, did I mention that `append` also supports chaining? :wink:
