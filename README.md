@@ -13,7 +13,7 @@ filter to their input; trimming their results on the fly.
 
 ### `constructor(search)`
 
-- `search` - An [elasticsearch search](https://www.elastic.co/guide/en/elasticsearch/client/javascript-api/current/api-reference.html#api-search)
+- `search` - An [elasticsearch query (DSL) clause](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl.html)
 
 ```js
 var FilterBuilder = require('elasticsearch-filter-append')
