@@ -112,8 +112,7 @@ Yes, did I mention that `append` also supports chaining? :wink:
 ### `toSearch()`
 
 `toSearch` is very straightforward. It unwraps the accumulated filter. It should be called subsequent to calls to
-`append`. `append` will leave any part of your search that does not affect filtering intact. So paging, etc. will
-be preserved. `append` will also take the latest state of the search/filter into account while chaining. For example,
+`append`. `append` will take the latest state of the search/filter into account while chaining. For example,
 you could go from a query, to a filtered query with a `should` filter, to a filtered query with a `must` filter.
 
 ## `bool must filter - array`
