@@ -133,8 +133,13 @@ var filter = {
 
 var builder = new FilterBuilder(queryClause)
 
-builder.append(filter)
+var secureQueryClause = builder.append(filter)
 
+elasticsearch.search({
+  body: secureQueryClause,
+  type: 'my type',
+  index: 'my ixndex'
+})
 ```
 
 ## `bool must filter - array`
