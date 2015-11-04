@@ -131,7 +131,7 @@ var filter = {
   }
 }
 
-var builder = new FilterBuilder(queryClause)
+var builder = new FilterBuilder(queryClause).toQueryClause()
 
 var secureQueryClause = builder.append(filter)
 
