@@ -11,15 +11,14 @@ filter to their input; trimming their results on the fly.
 
 ## `methods`
 
-### `constructor(search)`
+### `constructor(queryClause)`
 
-- `search` - An [elasticsearch query (DSL) clause](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl.html)
+- `queryClause` - An [elasticsearch query (DSL) clause](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl.html)
 
 ```js
 var FilterBuilder = require('elasticsearch-filter-append')
 
-var search = {
-  from: 99,
+var queryClause = {
   filter: {
     term: {
       name: 'Atlanta, GA'
@@ -27,7 +26,7 @@ var search = {
   }
 }
 
-var builder = new FilterBuilder(search)
+var builder = new FilterBuilder(queryClause)
 ```
 
 ### `append(filter1, filter2, filter3....filterN|Array)`
@@ -37,8 +36,7 @@ var builder = new FilterBuilder(search)
 ```js
 var FilterBuilder = require('elasticsearch-filter-append')
 
-var search = {
-  from: 99,
+var queryClause = {
   filter: {
     term: {
       name: 'Atlanta, GA'
@@ -58,7 +56,7 @@ var filter2 = {
   }
 }
 
-var builder = new FilterBuilder(search)
+var builder = new FilterBuilder(queryClause)
 
 builder.append(filter1, filter2)
 ```
@@ -68,8 +66,7 @@ builder.append(filter1, filter2)
 ```js
 var FilterBuilder = require('elasticsearch-filter-append')
 
-var search = {
-  from: 99,
+var queryClause = {
   filter: {
     term: {
       name: 'Atlanta, GA'
@@ -91,7 +88,7 @@ var filter2 = {
 
 var filters = [filter1, filter2]
 
-var builder = new FilterBuilder(search)
+var builder = new FilterBuilder(queryClause)
 
 builder.append(filters)
 ```
@@ -104,16 +101,46 @@ provided must evaluate to true. You can apply as many groups of conditions as yo
 You could call `append` as follows:
 
 ```
-var secureSearch = builder.append(filter1, filter2).append(filter3).toSearch()
+var secureQueryClause = builder.append(filter1, filter2).append(filter3).toQueryClause()
 ```
 
 Yes, did I mention that `append` also supports chaining? :wink:
 
-### `toSearch()`
+### `toQueryClause()`
 
-`toSearch` is very straightforward. It unwraps the accumulated filter. It should be called subsequent to calls to
-`append`. `append` will take the latest state of the search/filter into account while chaining. For example,
+`toQueryClause` is very straightforward. It unwraps the accumulated filter. It should be called subsequent to calls to
+`append`. `append` will take the latest state of the query clause into account while chaining. For example,
 you could go from a query, to a filtered query with a `should` filter, to a filtered query with a `must` filter.
+Once you have a query clause, you can forward the final payload off to elasticsearch:
+
+```
+var elasticsearch = require('elasticsearch')
+var FilterBuilder = require('elasticsearch-filter-append')
+
+var queryClause = {
+  filter: {
+    term: {
+      name: 'Atlanta, GA'
+    }
+  }
+}
+
+var filter = {
+  term: {
+    name: 'Wimberly'
+  }
+}
+
+var builder = new FilterBuilder(queryClause).toQueryClause()
+
+var secureQueryClause = builder.append(filter)
+
+elasticsearch.search({
+  body: secureQueryClause,
+  type: 'my type',
+  index: 'my ixndex'
+})
+```
 
 ## `bool must filter - array`
 
@@ -122,7 +149,7 @@ you could go from a query, to a filtered query with a `should` filter, to a filt
 ```js
 var FilterBuilder = require('elasticsearch-filter-append')
 
-var search = {
+var queryClause = {
   filter: {
     bool: {
       must: [
@@ -153,14 +180,14 @@ var filter = {
   }
 }
 
-var builder = new FilterBuilder(search)
+var builder = new FilterBuilder(queryClause)
 
 builder.append(filter)
 ```
 
 ### `Δδ`
 
-`builder.toSearch()`
+`builder.toQueryClause()`
 
 ```js
 {
@@ -207,7 +234,7 @@ builder.append(filter)
 ```js
 var FilterBuilder = require('elasticsearch-filter-append')
 
-var search = {
+var queryClause = {
   filter: {
     bool: {
       must: {
@@ -225,14 +252,14 @@ var filter = {
   }
 }
 
-var builder = new FilterBuilder(search)
+var builder = new FilterBuilder(queryClause)
 
 builder.append(filter)
 ```
 
 ### `Δδ`
 
-`builder.toSearch()`
+`builder.toQueryClause()`
 
 ```js
 {
@@ -268,7 +295,7 @@ builder.append(filter)
 ```js
 var FilterBuilder = require('elasticsearch-filter-append')
 
-var search = {
+var queryClause = {
   filter: {
     bool: {
       should: [
@@ -301,14 +328,14 @@ var filter = {
   }
 }
 
-var builder = new FilterBuilder(search)
+var builder = new FilterBuilder(queryClause)
 
 builder.append(filter)
 ```
 
 ### `Δδ`
 
-`builder.toSearch()`
+`builder.toQueryClause()`
 
 ```js
 {
@@ -363,8 +390,7 @@ builder.append(filter)
 ```js
 var FilterBuilder = require('elasticsearch-filter-append')
 
-var search = {
-  fields: ['one'],
+var queryClause = {
   query: {
     filtered: {
       query: {
@@ -410,18 +436,17 @@ var filter = {
   }
 }
 
-var builder = new FilterBuilder(search)
+var builder = new FilterBuilder(queryClause)
 
 builder.append(filter)
 ```
 
 ### `Δδ`
 
-`builder.toSearch()`
+`builder.toQueryClause()`
 
 ```js
 {
-  fields: ['one'],
   query: {
     filtered: {
       query: {
@@ -480,8 +505,7 @@ builder.append(filter)
 ```js
 var FilterBuilder = require('elasticsearch-filter-append')
 
-var search = {
-  fields: ['one'],
+var queryClause = {
   query: {
     filtered: {
       query: {
@@ -514,17 +538,16 @@ var filter = {
   }
 }
 
-var builder = new FilterBuilder(search)
+var builder = new FilterBuilder(queryClause)
 
 builder.append(filter)
 ```
 ### `Δδ`
 
-`builder.toSearch()`
+`builder.toQueryClause()`
 
 ```js
 {
-  fields: ['one'],
   query: {
     filtered: {
       query: {
@@ -572,8 +595,7 @@ builder.append(filter)
 ```js
 var FilterBuilder = require('elasticsearch-filter-append')
 
-var search = {
-  fields: ['one'],
+var queryClause = {
   query: {
     filtered: {
       query: {
@@ -621,18 +643,17 @@ var filter = {
   }
 }
 
-var builder = new FilterBuilder(search)
+var builder = new FilterBuilder(queryClause)
 
 builder.append(filter)
 ```
 
 ### `Δδ`
 
-`builder.toSearch()`
+`builder.toQueryClause()`
 
 ```js
 {
-  fields: ['one'],
   query: {
     filtered: {
       query: {
@@ -699,8 +720,7 @@ builder.append(filter)
 ```js
 var FilterBuilder = require('elasticsearch-filter-append')
 
-var search = {
-  fields: ['one'],
+var queryClause = {
   query: {
     filtered: {
       query: {
@@ -729,18 +749,17 @@ var filter = {
   }
 }
 
-var builder = new FilterBuilder(search)
+var builder = new FilterBuilder(queryClause)
 
 builder.append(filter)
 ```
 
 ### `Δδ`
 
-`builder.toSearch()`
+`builder.toQueryClause()`
 
 ```js
 {
-  fields: ['one'],
   query: {
     filtered: {
       query: {
@@ -788,7 +807,7 @@ builder.append(filter)
 ```js
 var FilterBuilder = require('elasticsearch-filter-append')
 
-var search = {
+var queryClause = {
   query: {
     query_string: {
       query: "*I spy an @kyspy \\? \\* &*",
@@ -804,14 +823,14 @@ var filter = {
   }
 }
 
-var builder = new FilterBuilder(search)
+var builder = new FilterBuilder(queryClause)
 
 builder.append(filter)
 ```
 
 ### `Δδ`
 
-`builder.toSearch()`
+`builder.toQueryClause()`
 
 ```js
 {
@@ -847,7 +866,7 @@ builder.append(filter)
 ```js
 var FilterBuilder = require('elasticsearch-filter-append')
 
-var search = {
+var queryClause = {
   filter: {
     term: {
       name: 'Antwan Atkins'
@@ -861,14 +880,14 @@ var filter = {
   }
 }
 
-var builder = new FilterBuilder(search)
+var builder = new FilterBuilder(queryClause)
 
 builder.append(filter)
 ```
 
 ### `Δδ`
 
-`builder.toSearch()`
+`builder.toQueryClause()`
 
 ```js
 {
