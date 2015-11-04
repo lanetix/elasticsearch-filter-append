@@ -1,6 +1,6 @@
 {
   "name": "elasticsearch-filter-append",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "append additional filters to filters, queries, and filtered queries",
   "main": "index.js",
   "scripts": {
