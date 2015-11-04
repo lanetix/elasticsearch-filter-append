@@ -1,6 +1,5 @@
 {
-  "search" : {
-    "fields": ["one"],
+  "queryClause" : {
     "query": {
       "filtered": {
         "query": {
@@ -28,7 +27,6 @@
     }
   },
   "output": {
-    "fields": ["one"],
     "query": {
       "filtered": {
         "query": {

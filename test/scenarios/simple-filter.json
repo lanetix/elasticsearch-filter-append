@@ -1,5 +1,5 @@
 {
-  "search" : {
+  "queryClause" : {
     "filter": {
       "term": {
         "name": "Antwan Atkins"
