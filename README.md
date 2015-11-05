@@ -100,7 +100,7 @@ provided must evaluate to true. You can apply as many groups of conditions as yo
 
 You could call `append` as follows:
 
-```
+```js
 var secureQueryClause = builder.append(filter1, filter2).append(filter3).toQueryClause()
 ```
 
@@ -113,7 +113,7 @@ Yes, did I mention that `append` also supports chaining? :wink:
 you could go from a query, to a filtered query with a `should` filter, to a filtered query with a `must` filter.
 Once you have a query clause, you can forward the final payload off to elasticsearch:
 
-```
+```js
 var elasticsearch = require('elasticsearch')
 var FilterBuilder = require('elasticsearch-filter-append')
 
